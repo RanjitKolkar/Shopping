@@ -103,36 +103,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 <body >
 <div class="container-fluid">
-
-
-<div class="p-4 bg-primary text-white text-center">
-  
-
-    <!-- creating notification when the user logs in -->
-    <!-- accessible only to the users that have logged in already -->
-    <?php if (isset($_SESSION['success'])) : ?>
-      <div class="error success" >
-        <h3>
-          <?php 
-            echo $_SESSION['success']; 
-            unset($_SESSION['success']);
-          ?>
-        </h3>
-      </div>
-    <?php endif ?>
-
-    <!-- information of the user logged in -->
-    <!-- welcome message for the logged in user -->
-    <?php  if (isset($_SESSION['username'])) : ?>
-      <div>Hi, <strong> <?php echo $_SESSION['username']; ?> </strong>
-    <a class="btn btn-danger" href="index.php?logout='1'"> logout</a> </div>
-    <?php endif ?>
-
+<div class="p-5 bg-primary text-white text-center">
+    <h1>Shopping</h1>
+   
 </div>
 
 <nav class="navbar navbar-expand-sm " >
 
-  <a class="navbar-brand" href="#" >
+  <a class="navbar-brand" href="index.php" >
     <img src="banner_images/banner_1.jpeg" width="30" height="30" class="d-inline-block align-top" alt="">
     Shopping
   </a>
@@ -150,7 +128,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
  <div class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 48rem;">
   
   <div class="card-body">
-    <h5 class="card-title">Login</h5>
+    <h2 class="card-title">Login</h2>
     
         <?php 
         if(!empty($login_err)){
@@ -173,7 +151,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
-            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+            <hr>
+            <p >Don't have an account? <a class="btn btn-success" href="register.php">Sign up</a></p>
         </form>
   </div>
 </div>

@@ -113,13 +113,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
 <div class="p-5 bg-primary text-white text-center">
-  
+    <h1>Shopping</h1>
    
 </div>
 
 <nav class="navbar navbar-expand-sm navbar-light nav-pills" >
 
-  <a class="navbar-brand" href="#" >
+  <a class="navbar-brand" href="index.php" >
     <img src="banner_images/banner_1.jpeg" width="30" height="30" class="d-inline-block align-top" alt="">
     Shopping
   </a>
@@ -135,7 +135,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
  <div class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 48rem;">
   
   <div class="card-body">
-    <h5 class="card-title">Login</h5>
+    <h2 class="card-title">Register</h2>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group">
                 <label>Username</label>
@@ -157,11 +157,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="submit" class="btn btn-primary" value="Submit">
                 <input type="reset" class="btn btn-secondary ml-2" value="Reset">
             </div>
-            <p>Already have an account? <a href="login.php">Login here</a>.</p>
+            <hr>
+            <p>Already have an account? <a class="btn btn-success" href="login.php">Login </a></p>
         </form>
     </div>  
     </div>
     </div>  
-    
+
 </body>
 </html>

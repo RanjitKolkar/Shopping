@@ -17,6 +17,8 @@
   }
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +39,7 @@
 
 <div class="p-4 bg-primary text-white text-center">
   
-
+  <h1>Shopping</h1>
     <!-- creating notification when the user logs in -->
     <!-- accessible only to the users that have logged in already -->
     <?php if (isset($_SESSION['success'])) : ?>
@@ -54,7 +56,7 @@
     <!-- information of the user logged in -->
     <!-- welcome message for the logged in user -->
     <?php  if (isset($_SESSION['username'])) : ?>
-      <div>Hi, <strong> <?php echo $_SESSION['username']; ?> </strong>
+      <div>Hi, <strong> <?php echo $_SESSION['username']; ?> &nbsp; &nbsp;</strong>
     <a class="btn btn-danger" href="index.php?logout='1'"> logout</a> </div>
     <?php endif ?>
 
@@ -62,7 +64,7 @@
 
 <nav class="navbar navbar-expand-sm shadow p-3 mb-5 bg-white rounded" >
 
-  <a class="navbar-brand" href="#" >
+<a class="navbar-brand" href="index.php" >
     <img src="banner_images/banner_1.jpeg" width="30" height="30" class="d-inline-block align-top" alt="">
     Shopping
   </a>
