@@ -202,8 +202,8 @@
             if($data[0]==$image_rec){
               $found=1;
               $image1= $data[1].".jpg";
-              $image2= $data[1].".jpg";
-              $image3= $data[1].".jpg";
+              $image2= $data[2].".jpg";
+              $image3= $data[3].".jpg";
 
               //Remove spaces
               $image1 = str_replace(' ','',$image1); 
@@ -250,7 +250,7 @@ body {
 
   box-shadow: 5px 10px #F8F8F6;
   margin-top: 4px;
-   border: 2px solid #e8e8e8;
+   border: 2px solid #0275d8;
    border-radius: 10px;
    float: left;
     width:  300px;

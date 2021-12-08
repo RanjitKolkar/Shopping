@@ -215,7 +215,7 @@ foreach ($rand as $r) {
 
 .column img {
   margin-top: 4px;
-   border: 2px solid #e8e8e8;
+   border: 2px solid #0275d8;
    border-radius: 20px;
    float: left;
     width:  300px;
