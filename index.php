@@ -1,20 +1,21 @@
-<?php 
-  session_start(); //starting the session, to use and store data in session variable
-
-  //if the session variable is empty, this means the user is yet to login
-  //user will be sent to 'login.php' page to allow the user to login
-  if (!isset($_SESSION['username'])) {
+<?php
+session_start(); //starting the session, to use and store data in session variable
+//if the session variable is empty, this means the user is yet to login
+//user will be sent to 'login.php' page to allow the user to login
+if (!isset($_SESSION['username']))
+{
     $_SESSION['msg'] = "You have to log in first";
     header('location: login.php');
-  }
+}
 
-  // logout button will destroy the session, and will unset the session variables
-  //user will be headed to 'login.php' after loggin out
-  if (isset($_GET['logout'])) {
+// logout button will destroy the session, and will unset the session variables
+//user will be headed to 'login.php' after loggin out
+if (isset($_GET['logout']))
+{
     session_destroy();
     unset($_SESSION['username']);
     header("location: login.php");
-  }
+}
 
 ?>
 
@@ -42,23 +43,25 @@
   <h1>Shopping</h1>
     <!-- creating notification when the user logs in -->
     <!-- accessible only to the users that have logged in already -->
-    <?php if (isset($_SESSION['success'])) : ?>
+    <?php if (isset($_SESSION['success'])): ?>
       <div class="error success" >
         <h3>
-          <?php 
-            echo $_SESSION['success']; 
-            unset($_SESSION['success']);
-          ?>
+          <?php
+    echo $_SESSION['success'];
+    unset($_SESSION['success']);
+?>
         </h3>
       </div>
-    <?php endif ?>
+    <?php
+endif ?>
 
     <!-- information of the user logged in -->
     <!-- welcome message for the logged in user -->
-    <?php  if (isset($_SESSION['username'])) : ?>
+    <?php if (isset($_SESSION['username'])): ?>
       <div>Hi, <strong> <?php echo $_SESSION['username']; ?> &nbsp; &nbsp;</strong>
     <a class="btn btn-danger" href="index.php?logout='1'"> logout</a> </div>
-    <?php endif ?>
+    <?php
+endif ?>
 
 </div>
 
@@ -105,22 +108,22 @@
     <div class="carousel-item active">
       <img src="banner_images/banner_1.jpeg" alt="Los Angeles" class="d-block" style="width:100%">
       <div class="carousel-caption text-primary">
-        <h3>Los Angeles</h3>
-        <p>We had such a great time in LA!</p>
+        <h3>Slide Title</h3>
+        <p>Slide Description goes here</p>
       </div>
     </div>
     <div class="carousel-item ">
       <img src="banner_images/banner_1.jpeg" alt="Chicago" class="d-block" style="width:100%">
       <div class="carousel-caption text-primary">
-        <h3>Chicago</h3>
-        <p>Thank you, Chicago!</p>
+        <h3>Slide Title</h3>
+        <p>Slide Description goes here</p>
       </div> 
     </div>
     <div class="carousel-item">
       <img src="banner_images/banner_1.jpeg" alt="New York" class="d-block" style="width:100%">
       <div class="carousel-caption text-primary">
-        <h3>New York</h3>
-        <p>We love the Big Apple!</p>
+        <h3>Slide Title</h3>
+        <p>Slide Description goes here</p>
       </div>  
     </div>
   </div>
@@ -140,7 +143,7 @@
 <!-- Photo Grid -->
 <div class="row"> 
 
-<?php 
+<?php
 $rows = file("csv_files/Clusters.csv");
 $len = count($rows);
 $rand = [];
@@ -148,33 +151,35 @@ $rand = [];
 $directory = "images_folder";
 $images = glob($directory . "/*.jpg");
 
-foreach($images as $image)
+foreach ($images as $image)
 {
-  $image_from_folder= substr($image,14,);
+    $image_from_folder = substr($image, 14,);
 
-
-
-while (count($rand) < 60) {
-    $r = rand(0, $len);
-    if (!in_array($r, $rand)) {
-        $rand[] = $r;
-    }
-}
-foreach ($rand as $r) {
-    $csv = $rows[$r];
-    $data = str_getcsv($csv);
-    if($image_from_folder==$data[0])
+    while (count($rand) < 60)
     {
-    ?>
+        $r = rand(0, $len);
+        if (!in_array($r, $rand))
+        {
+            $rand[] = $r;
+        }
+    }
+    foreach ($rand as $r)
+    {
+        $csv = $rows[$r];
+        $data = str_getcsv($csv);
+        if ($image_from_folder == $data[0])
+        {
+?>
 
 
      <div class="column ">
-    <a href="product_view.php?id1=<?php echo $data[0]; ?>&id2=<?php echo $data[1]; ?>"><img src="images_folder/<?php echo $data[0]; ?>" alt="images_folder/<?php echo $data[0]; ?>" /></a>
-            <!-- <p> <?php echo $data[0].", ".$data[1]; ?></p> -->
-             <p> <?php echo "Image ".$r; ?></p> 
+    <a href="product_view.php?image_to_send=<?php echo $data[0]; ?>&cluster_to_send=<?php echo $data[1]; ?>"><img src="images_folder/<?php echo $data[0]; ?>" alt="images_folder/<?php echo $data[0]; ?>" /></a>
+            <!-- <p> <?php echo $data[0] . ", " . $data[1]; ?></p> -->
+             <p> <?php echo "Image " . $r; ?></p> 
             </div> 
             <?php
-}}
+        }
+    }
 }
 ?>
 
@@ -242,6 +247,6 @@ foreach ($rand as $r) {
 }
 </style>
 
-		
+    
 </body>
 </html>

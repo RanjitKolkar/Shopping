@@ -1,20 +1,53 @@
-<?php 
-  session_start(); //starting the session, to use and store data in session variable
-
-  //if the session variable is empty, this means the user is yet to login
-  //user will be sent to 'login.php' page to allow the user to login
-  if (!isset($_SESSION['username'])) {
+<?php
+session_start(); //starting the session, to use and store data in session variable
+//if the session variable is empty, this means the user is yet to login
+//user will be sent to 'login.php' page to allow the user to login
+if (!isset($_SESSION['username']))
+{
     $_SESSION['msg'] = "You have to log in first";
     header('location: login.php');
-  }
+}
 
-  // logout button will destroy the session, and will unset the session variables
-  //user will be headed to 'login.php' after loggin out
-  if (isset($_GET['logout'])) {
+// logout button will destroy the session, and will unset the session variables
+//user will be headed to 'login.php' after loggin out
+if (isset($_GET['logout']))
+{
     session_destroy();
     unset($_SESSION['username']);
     header("location: login.php");
-  }
+}
+
+function getCluster($image_input)
+{
+    $rows = file("csv_files/Clusters.csv");
+    $len = count($rows);
+    $rand = [];
+    $cluster_out = 'Not found';
+
+    $r = 1;
+    while (count($rand) < 10000)
+    {
+        $r++;
+        if (!in_array($r, $rand))
+        {
+            $rand[] = $r;
+        }
+    }
+    foreach ($rand as $r)
+    {
+        $csv = $rows[$r];
+        $data = str_getcsv($csv);
+
+        if ($data[0] == $image_input)
+        {
+            $cluster_out = $data[1];
+            $image_out = $data[0];
+            break;
+        }
+    }
+
+    return $cluster_out;
+}
 
 ?>
 
@@ -42,23 +75,25 @@
 
     <!-- creating notification when the user logs in -->
     <!-- accessible only to the users that have logged in already -->
-    <?php if (isset($_SESSION['success'])) : ?>
+    <?php if (isset($_SESSION['success'])): ?>
       <div class="error success" >
         <h3>
-          <?php 
-            echo $_SESSION['success']; 
-            unset($_SESSION['success']);
-          ?>
+          <?php
+    echo $_SESSION['success'];
+    unset($_SESSION['success']);
+?>
         </h3>
       </div>
-    <?php endif ?>
+    <?php
+endif ?>
 
     <!-- information of the user logged in -->
     <!-- welcome message for the logged in user -->
-    <?php  if (isset($_SESSION['username'])) : ?>
+    <?php if (isset($_SESSION['username'])): ?>
       <div>Hi, <strong> <?php echo $_SESSION['username']; ?> &nbsp; &nbsp;</strong>
     <a class="btn btn-danger" href="index.php?logout='1'"> logout</a> </div>
-    <?php endif ?>
+    <?php
+endif ?>
 
 </div>
 
@@ -84,14 +119,17 @@
           <div class="preview col-md-6">
             
             <div class="preview-pic tab-content">
-              <?php $id=$_GET['id1']; $id1=$_GET['id2']; 
-// echo "cluster: ".$id1;echo " image name: ".$id;
+              <?php $image_received = $_GET['image_to_send'];
+$cluster_received = $_GET['cluster_to_send'];
+// echo "Image received: ".$image_received;
+// echo "getCluster: ".getCluster($image_received);
+
 ?>
 
 
               <div class="tab-pane active" id="pic-1">
-                <img src="images_folder/<?php echo $id;?>" alt="images_folder/<?php echo $id;?>"  />
-                <!-- <p> <?php echo $id; ?></p> -->
+                <img src="images_folder/<?php echo $image_received; ?>" alt="images_folder/<?php echo $image_received; ?>"  />
+                <!-- <p> <?php echo $image_received; ?></p> -->
               </div>
       
             </div>
@@ -105,7 +143,7 @@
             
           </div>
           <div class="details col-md-6">
-            <h3 class="product-title"><?php echo substr($id,0,-10); ?></h3>
+            <h3 class="product-title"><?php echo substr($image_received, 0, -10); ?></h3>
             <div class="rating">
               <div class="stars">
                 <span class="fa fa-star checked"></span>
@@ -146,90 +184,109 @@
 
 <div class="card">
   <div class="row">
-    <p>Images from cluster:  <php? echo $id1?> </p>
+    <p>Images from cluster:  <?php echo $cluster_received ?> </p>
+    
+
     <?php
-      $row = 1;
-      $counter=1;
-    if (($handle = fopen("csv_files/Clusters.csv", "r")) !== FALSE) {
-        // $i=0;
-        // $data = fgetcsv($handle, 100, ",");
+$rows = file("csv_files/Clusters.csv");
+$len = count($rows);
+$rand = [];
+$count = 0;
 
-        while (($data= fgetcsv($handle, 100, ",")) !== FALSE AND $counter<=3) {
-             // shuffle($data);
-            $num = count($data);
-
-            
-            $row++;
-       
-            ?>
-               <?php
-      
-      if($data[1]==$id1){
-     
-      $counter++; ?>
-       
-      <div class="col-md-4"><img src="images_folder/<?php echo $data[0];?>" alt="images_folder/<?php echo $data[0];?>"  />
-      <!-- <p> <?php echo $data[0]; ?></p> -->
-      </div>
-
-   <?php
-}
-     }
-     
-
-        fclose($handle);
+while (count($rand) < 1000)
+{
+    $r = rand(0, $len);
+    if (!in_array($r, $rand))
+    {
+        $rand[] = $r;
     }
-    ?>
+}
+
+foreach ($rand as $r)
+{
+    $csv = $rows[$r];
+    $data = str_getcsv($csv);
+    // echo $data[1];
+    if ($data[1] == $cluster_received && $count < 3)
+    {
+        $count++;
+
+?>
+                       
+                      <div class="col-md-4">
+                      <a href="product_view.php?image_to_send=<?php echo $data[0]; ?>&cluster_to_send=<?php echo $data[1]; ?>">
+                      <img src="images_folder/<?php echo $data[0]; ?>" alt="images_folder/<?php echo $data[0]; ?>"  /></a>
+                      <!-- <p> <?php echo $data[0]; ?></p> -->
+                      </div>
+                      <?php
+    }
+}
+
+?>
 
     
 </div>
   <div class="row">
 <hr>
     <?php
-    $row = 1;
-    $found=0;
-    if (($handle = fopen("csv_files/Content_recomendation.csv", "r")) !== FALSE) {
-        // $i=0;
-        // $data = fgetcsv($handle, 100, ",");
+$row = 1;
+$found = 0;
+if (($handle = fopen("csv_files/Content_recomendation.csv", "r")) !== false)
+{
+    // $i=0;
+    // $data = fgetcsv($handle, 100, ",");
+    while (($data = fgetcsv($handle, 100, ",")) !== false)
+    {
+        // shuffle($data);
+        $num = count($data);
 
-        while (($data= fgetcsv($handle, 100, ",")) !== FALSE ) {
-             // shuffle($data);
-            $num = count($data);
+        // 0456830197, B00020J0ZO, B0002UT2N4, B0000WVVLU
+        $image_rec = substr($image_received, 0, -4);
 
-            // 0456830197, B00020J0ZO, B0002UT2N4, B0000WVVLU
-            $image_rec = substr($id,0,-4);
-         
-            if($data[0]==$image_rec){
-              $found=1;
-              $image1= $data[1].".jpg";
-              $image2= $data[2].".jpg";
-              $image3= $data[3].".jpg";
+        if ($data[0] == $image_rec)
+        {
+            $found = 1;
+            $image1 = $data[1] . ".jpg";
+            $image2 = $data[2] . ".jpg";
+            $image3 = $data[3] . ".jpg";
 
-              //Remove spaces
-              $image1 = str_replace(' ','',$image1); 
-              $image2 = str_replace(' ','',$image2); 
-              $image3 = str_replace(' ','',$image3); 
-              
-               echo "<p>Recommneded images </p>";?>
-              <div class="col-md-4"><img src="images_folder/<?php echo $image1;?>" alt="images_folder/<?php echo $image1;?>" />
+            //Remove spaces
+            $image1 = str_replace(' ', '', $image1);
+            $image2 = str_replace(' ', '', $image2);
+            $image3 = str_replace(' ', '', $image3);
+?>
+              <p>Images recommended for:  <?php echo $data[0] ?> </p>
+
+              <?php
+            $cl1 = getCluster($image1);
+            $cl2 = getCluster($image2);
+            $cl3 = getCluster($image3);
+?>
+              <div class="col-md-4">
+               <a href="product_view.php?image_to_send=<?php echo $image1; ?>&cluster_to_send=<?php echo $cl1; ?>">
+                <img src="images_folder/<?php echo $image1; ?>" alt="images_folder/<?php echo $image1; ?>" /></a>
             
               </div>
-              <div class="col-md-4"><img src="images_folder/<?php echo $image2;?>" alt="images_folder/<?php echo $image2;?>" />
+              <div class="col-md-4">
+                <a href="product_view.php?image_to_send=<?php echo $image2; ?>&cluster_to_send=<?php echo $cl2; ?>">
+                <img src="images_folder/<?php echo $image2; ?>" alt="images_folder/<?php echo $image2; ?>" /></a>
             
               </div>
-              <div class="col-md-4"><img src="images_folder/<?php echo $image3;?>" alt="images_folder/<?php echo $image3;?>" />
+              <div class="col-md-4">
+                <a href="product_view.php?image_to_send=<?php echo $image3; ?>&cluster_to_send=<?php echo $cl3; ?>">
+                <img src="images_folder/<?php echo $image3; ?>" alt="images_folder/<?php echo $image3; ?>" /></a>
             
               </div>
               <?php break;
-  
-}
-else $found=0;
-     }
-     if($found==0) echo "Recommendation not found for ".$id;
 
-        fclose($handle);
+        }
+        else $found = 0;
     }
-    ?>
+    if ($found == 0) echo "Recommendation not found for " . $image_received;
+
+    fclose($handle);
+}
+?>
 
 
 </div></div>
@@ -421,4 +478,3 @@ body {
 
 </body>
 </html>
-
