@@ -106,11 +106,15 @@ endif ?>
 <nav class="nav nav-pills nav-justified">
   <a class="nav-link active" href="index.php">Home</a>
   <a class="nav-link " href="contact.php">Contact</a>
-  <a class="nav-link" href="#">Cart</a>
+
 </nav>  
+            <div class="cart_div">
+              <a href="carttest/demo/cart.php"><img src="carttest/demo/cart-icon.png" /> Cart<span><?php echo 2; ?></span></a>
+              </div>
 </nav>
 
 <div class="container mt-5">
+ 
   <div class="row">
   <div class="container">
     <div class="card">
@@ -128,6 +132,7 @@ $cluster_received = $_GET['cluster_to_send'];
 
 
               <div class="tab-pane active" id="pic-1">
+
                 <img src="images_folder/<?php echo $image_received; ?>" alt="images_folder/<?php echo $image_received; ?>"  />
                 <!-- <p> <?php echo $image_received; ?></p> -->
               </div>
@@ -144,6 +149,7 @@ $cluster_received = $_GET['cluster_to_send'];
           </div>
           <div class="details col-md-6">
             <h3 class="product-title"><?php echo substr($image_received, 0, -10); ?></h3>
+
             <div class="rating">
               <div class="stars">
                 <span class="fa fa-star checked"></span>
@@ -168,12 +174,19 @@ $cluster_received = $_GET['cluster_to_send'];
               <span class="color green"></span>
               <span class="color blue"></span>
             </h5> -->
+
+
+
+          <form method='post' action=''>
             <div class="action">
               <button class="add-to-cart btn btn-default" type="button">add to cart</button>
+              
               <!-- <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button> -->
             </div> 
+              </form>     
           </div>
         </div>
+
 
 
 
@@ -184,7 +197,7 @@ $cluster_received = $_GET['cluster_to_send'];
 
 <div class="card">
   <div class="row">
-    <p>Images from cluster:  <?php echo $cluster_received ?> </p>
+    <!-- <p>Images from cluster:  <?php echo $cluster_received ?> </p> -->
     
 
     <?php
@@ -255,7 +268,7 @@ if (($handle = fopen("csv_files/Content_recomendation.csv", "r")) !== false)
             $image2 = str_replace(' ', '', $image2);
             $image3 = str_replace(' ', '', $image3);
 ?>
-              <p>Images recommended for:  <?php echo $data[0] ?> </p>
+              <!-- <p>Images recommended for:  <?php echo $data[0] ?> </p> -->
 
               <?php
             $cl1 = getCluster($image1);
@@ -282,7 +295,7 @@ if (($handle = fopen("csv_files/Content_recomendation.csv", "r")) !== false)
         }
         else $found = 0;
     }
-    if ($found == 0) echo "Recommendation not found for " . $image_received;
+    if ($found == 0) echo "No results ";
 
     fclose($handle);
 }
@@ -472,6 +485,78 @@ body {
             transform: scale(1); } }
 
 /*# sourceMappingURL=style.css.map */
+
+
+.product_wrapper {
+  float:left;
+  padding: 10px;
+  text-align: center;
+  }
+.product_wrapper:hover {
+  box-shadow: 0 0 0 2px #e5e5e5;
+  cursor:pointer;
+  }
+.product_wrapper .name {
+  font-weight:bold;
+  }
+.product_wrapper .buy {
+  text-transform: uppercase;
+    background: #F68B1E;
+    border: 1px solid #F68B1E;
+    cursor: pointer;
+    color: #fff;
+    padding: 8px 40px;
+    margin-top: 10px;
+}
+.product_wrapper .buy:hover {
+  background: #f17e0a;
+    border-color: #f17e0a;
+}
+.message_box .box{
+  margin: 10px 0px;
+    border: 1px solid #2b772e;
+    text-align: center;
+    font-weight: bold;
+    color: #2b772e;
+  }
+.table td {
+  border-bottom: #F0F0F0 1px solid;
+  padding: 10px;
+  }
+.cart_div {
+  float:right;
+  font-weight:bold;
+  position:relative;
+  }
+.cart_div a {
+  color:#000;
+  } 
+.cart_div span {
+  font-size: 12px;
+    line-height: 14px;
+    background: #F68B1E;
+    padding: 2px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: -1px;
+    left: 13px;
+    color: #fff;
+    width: 14px;
+    height: 13px;
+    text-align: center;
+  }
+.cart .remove {
+    background: none;
+    border: none;
+    color: #0067ab;
+    cursor: pointer;
+    padding: 0px;
+  }
+.cart .remove:hover {
+  text-decoration:underline;
+  }
+
 </style>
 
 
