@@ -103,14 +103,11 @@ endif ?>
     <img src="banner_images/banner_1.jpeg" width="30" height="30" class="d-inline-block align-top" alt="">
     Shopping
   </a>
-<nav class="nav nav-pills nav-justified">
+        <nav class="nav nav-pills nav-justified">
   <a class="nav-link active" href="index.php">Home</a>
   <a class="nav-link " href="contact.php">Contact</a>
-
-</nav>  
-            <div class="cart_div">
-              <a href="carttest/demo/cart.php"><img src="carttest/demo/cart-icon.png" /> Cart<span><?php echo 2; ?></span></a>
-              </div>
+  <a class="nav-link " href="cart.php">Cart</a>
+</nav> 
 </nav>
 
 <div class="container mt-5">
@@ -147,6 +144,13 @@ $cluster_received = $_GET['cluster_to_send'];
             </ul> -->
             
           </div>
+
+          <?php 
+          $var_value = $image_received;
+          $_SESSION['varname'] = $var_value; 
+
+          ?>
+         
           <div class="details col-md-6">
             <h3 class="product-title"><?php echo substr($image_received, 0, -10); ?></h3>
 
@@ -158,32 +162,37 @@ $cluster_received = $_GET['cluster_to_send'];
                 <span class="fa fa-star"></span>
                 <span class="fa fa-star"></span>
               </div>
-              <span class="review-no">0000 reviews</span>
+              <!-- <span class="review-no">0000 reviews</span> -->
             </div>
             <p class="product-description">Description Goes here</p>
-            <h4 class="price">current price: <span>$000</span></h4>
+            <!-- <h4 class="price">current price: <span>$</span></h4> -->
 <!--            
          <h5 class="sizes">sizes:
               <span class="size" data-toggle="tooltip" title="small">s</span>
               <span class="size" data-toggle="tooltip" title="medium">m</span>
               <span class="size" data-toggle="tooltip" title="large">l</span>
               <span class="size" data-toggle="tooltip" title="xtra large">xl</span>
-            </h5>
-            <h5 class="colors">colors:
-              <span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
-              <span class="color green"></span>
-              <span class="color blue"></span>
-            </h5> -->
+             </h5> -->
+          
+           
 
 
 
-          <form method='post' action=''>
+           <form action="cart.php" method="POST">
+            <label>Rate the Item: </label>
+            <select id="rating_id" name="myRatingsOption" >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+   
             <div class="action">
-              <button class="add-to-cart btn btn-default" type="button">add to cart</button>
-              
-              <!-- <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button> -->
-            </div> 
-              </form>     
+            <button class="add-to-cart btn btn-default" type="submit">Submit</button>
+           </div>
+
+              </form>       
           </div>
         </div>
 

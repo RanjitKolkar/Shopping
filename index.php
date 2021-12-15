@@ -74,7 +74,7 @@ endif ?>
 <nav class="nav nav-pills nav-justified">
   <a class="nav-link active" href="index.php">Home</a>
   <a class="nav-link " href="contact.php">Contact</a>
-  <a class="nav-link" href="#">Cart</a>
+  <a class="nav-link" href="cart.php">Cart</a>
 </nav>  
 </nav>
 
