@@ -235,11 +235,22 @@ foreach ($rand as $r)
 
 ?>
                        
-                      <div class="col-md-4">
+                      <div class="col-md-3">
                       <a href="product_view.php?image_to_send=<?php echo $data[0]; ?>&cluster_to_send=<?php echo $data[1]; ?>">
                       <img src="images_folder/<?php echo $data[0]; ?>" alt="images_folder/<?php echo $data[0]; ?>"  /></a>
                       <!-- <p> <?php echo $data[0]; ?></p> -->
-                      </div>
+
+                      
+                                      <div class="rating">
+              <div class="stars">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star "></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+              </div>
+              <!-- <span class="review-no">0000 reviews</span> -->
+            </div></div>
                       <?php
     }
 }
@@ -284,20 +295,47 @@ if (($handle = fopen("csv_files/Content_recomendation.csv", "r")) !== false)
             $cl2 = getCluster($image2);
             $cl3 = getCluster($image3);
 ?>
-              <div class="col-md-4">
+              <div class="col-md-3">
                <a href="product_view.php?image_to_send=<?php echo $image1; ?>&cluster_to_send=<?php echo $cl1; ?>">
                 <img src="images_folder/<?php echo $image1; ?>" alt="images_folder/<?php echo $image1; ?>" /></a>
-            
+                                       <div class="rating">
+              <div class="stars">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star "></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
               </div>
-              <div class="col-md-4">
+              <!-- <span class="review-no">0000 reviews</span> -->
+            </div>
+              </div>
+              <div class="col-md-3">
                 <a href="product_view.php?image_to_send=<?php echo $image2; ?>&cluster_to_send=<?php echo $cl2; ?>">
                 <img src="images_folder/<?php echo $image2; ?>" alt="images_folder/<?php echo $image2; ?>" /></a>
-            
+                                       <div class="rating">
+              <div class="stars">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
               </div>
-              <div class="col-md-4">
+              <!-- <span class="review-no">0000 reviews</span> -->
+            </div>
+              </div>
+              <div class="col-md-3">
                 <a href="product_view.php?image_to_send=<?php echo $image3; ?>&cluster_to_send=<?php echo $cl3; ?>">
                 <img src="images_folder/<?php echo $image3; ?>" alt="images_folder/<?php echo $image3; ?>" /></a>
-            
+                                       <div class="rating">
+              <div class="stars">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star "></span>
+                <span class="fa fa-star "></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+              </div>
+              <!-- <span class="review-no">0000 reviews</span> -->
+            </div>
               </div>
               <?php break;
 

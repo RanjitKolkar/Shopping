@@ -71,7 +71,7 @@
 <nav class="nav nav-pills nav-justified ">
   <a class="nav-link " href="index.php">Home</a>
   <a class="nav-link active" href="contact.php">Contact</a>
-  <a class="nav-link " href="cart.php">Cart</a>
+
 </nav>  
 </nav>
 
