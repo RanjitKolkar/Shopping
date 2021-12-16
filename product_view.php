@@ -146,8 +146,8 @@ $cluster_received = $_GET['cluster_to_send'];
           </div>
 
           <?php 
-          $var_value = $image_received;
-          $_SESSION['varname'] = $var_value; 
+          $image_rcvd = $image_received;
+          $_SESSION['varname'] = $image_rcvd; 
 
           ?>
          
@@ -189,10 +189,10 @@ $cluster_received = $_GET['cluster_to_send'];
             </select>
    
             <div class="action">
-            <button class="add-to-cart btn btn-default" type="submit">Submit</button>
+            <button class="add-to-cart btn btn-default" type="submit">Add to Cart</button>
            </div>
-
-              </form>       
+            </form>
+                  
           </div>
         </div>
 
@@ -242,15 +242,33 @@ foreach ($rand as $r)
 
                       
                                       <div class="rating">
-              <div class="stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star "></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div>
+            <form action="cart.php" method="POST">
+              
+            <label>Rate the Item: </label>
+            <select id="rating_id" name="myRatingsOption<?php echo $count; ?>" >
+                <option value="<?php echo $count."1"; ?>">1</option>
+                  <option value="<?php echo $count."2"; ?>">2</option>
+                      <option value="<?php echo $count."3"; ?>">3</option>
+                          <option value="<?php echo $count."4"; ?>">4</option>
+                              <option value="<?php echo $count."5"; ?>">5</option>
+            </select>
+            
+        <?php
+
+        // echo "----".$count." ".$data[0];
+
+          if($count==1)
+                $_SESSION['img1']=$data[0];
+          if($count==2)
+                $_SESSION['img2']=$data[0];
+          if($count==3)
+                $_SESSION['img3']=$data[0];
+
+                ?>
+             
               <!-- <span class="review-no">0000 reviews</span> -->
-            </div></div>
+            </div>
+          </div>
                       <?php
     }
 }
@@ -299,13 +317,16 @@ if (($handle = fopen("csv_files/Content_recomendation.csv", "r")) !== false)
                <a href="product_view.php?image_to_send=<?php echo $image1; ?>&cluster_to_send=<?php echo $cl1; ?>">
                 <img src="images_folder/<?php echo $image1; ?>" alt="images_folder/<?php echo $image1; ?>" /></a>
                                        <div class="rating">
-              <div class="stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star "></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div>
+
+                                        <?php $_SESSION['img4'] = $image1;?>
+              <label>Rate the Item: </label>
+            <select id="rating_id" name="myRatingsOption4" >
+                <option value="41">1</option>
+                <option value="42">2</option>
+                <option value="43">3</option>
+                <option value="44">4</option>
+                <option value="45">5</option>
+            </select>
               <!-- <span class="review-no">0000 reviews</span> -->
             </div>
               </div>
@@ -313,13 +334,15 @@ if (($handle = fopen("csv_files/Content_recomendation.csv", "r")) !== false)
                 <a href="product_view.php?image_to_send=<?php echo $image2; ?>&cluster_to_send=<?php echo $cl2; ?>">
                 <img src="images_folder/<?php echo $image2; ?>" alt="images_folder/<?php echo $image2; ?>" /></a>
                                        <div class="rating">
-              <div class="stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-              </div>
+                                        <?php $_SESSION['img5'] = $image2;?>
+              <label>Rate the Item: </label>
+            <select id="rating_id" name="myRatingsOption5" >
+                <option value="51">1</option>
+                <option value="52">2</option>
+                <option value="53">3</option>
+                <option value="54">4</option>
+                <option value="55">5</option>
+            </select>
               <!-- <span class="review-no">0000 reviews</span> -->
             </div>
               </div>
@@ -327,16 +350,25 @@ if (($handle = fopen("csv_files/Content_recomendation.csv", "r")) !== false)
                 <a href="product_view.php?image_to_send=<?php echo $image3; ?>&cluster_to_send=<?php echo $cl3; ?>">
                 <img src="images_folder/<?php echo $image3; ?>" alt="images_folder/<?php echo $image3; ?>" /></a>
                                        <div class="rating">
-              <div class="stars">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star "></span>
-                <span class="fa fa-star "></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div>
-              <!-- <span class="review-no">0000 reviews</span> -->
+                                        <?php $_SESSION['img6'] = $image3;?>
+              <label>Rate the Item: </label>
+            <select id="rating_id" name="myRatingsOption6" >
+                <option value="61">1</option>
+                <option value="62">2</option>
+                <option value="63">3</option>
+                <option value="64">4</option>
+                <option value="65">5</option>
+            </select>
+              <!-- <s
+                pan class="review-no">0000 reviews</span> -->
             </div>
+
+            <div class="action">
+            <button class="add-to-cart btn btn-default" type="submit">Submit Ratings</button>
+           </div>
+           
               </div>
+            </form>
               <?php break;
 
         }

@@ -75,12 +75,65 @@ endif
       </nav>
       <div class="container mt-5">
         <?php
+
+         function InsertRatings($rating,$img,$session_name,$algo){
+        
+// echo $rating." ";
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "Shopping";
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error)
+    {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+           $rating_id = $rating[-1];
+           $img=substr($img,0,-4);
+            // echo $rating_id." ";
+           $sql = "INSERT INTO product_rating (product, rating, algorithm,rated_from,session_name)
+                        VALUES ('$img', $rating_id, $algo,1,'$session_name')";
+                if ($conn->query($sql) === true)
+                {
+                    echo "Ratings updated for: ".$img.", rating: ".$rating_id.", Algorithm used: ".$algo."<br>";
+                    
+                }
+      
+
+
+    }
+
+
+
 if (isset($_POST))
 {
     //Process Form Here
     $rating = $_POST['myRatingsOption'];
+    $rating1 = $_POST['myRatingsOption1'];
+    $rating2 = $_POST['myRatingsOption2'];
+    $rating3 = $_POST['myRatingsOption3'];
+    $rating4 = $_POST['myRatingsOption4'];
+    $rating5= $_POST['myRatingsOption5'];
+    $rating6 = $_POST['myRatingsOption6'];
+
+    // echo "-------- ".$rating1."-------- ".$rating2."-------- ".$rating3."-------- ".$rating4."-------- ".$rating5."-------- ".$rating6;
+
     $session_name = $_SESSION['username'];
     $image_name = $_SESSION['varname'];
+    $img1 = $_SESSION['img1'];
+    $img2 = $_SESSION['img2'];
+    $img3 = $_SESSION['img3'];
+    $img4 = $_SESSION['img4'];
+    $img5 = $_SESSION['img5'];
+    $img6 = $_SESSION['img6'];
+    // echo "-------- ".$img1."-------- ".$img2."-------- ".$img3."-------- ".$img4."-------- ".$img5;
+
+
+
+
     $image_name = substr($image_name, 0, -4);
     $servername = "localhost";
     $username = "root";
@@ -94,6 +147,15 @@ if (isset($_POST))
         die("Connection failed: " . $conn->connect_error);
     }
 
+
+$algo1=1;
+$algo2=2;
+    InsertRatings($rating1,$img1,$session_name,$algo1);
+    InsertRatings($rating2,$img2,$session_name,$algo1);
+    InsertRatings($rating3,$img3,$session_name,$algo1);
+    InsertRatings($rating4,$img4,$session_name,$algo2);
+    InsertRatings($rating5,$img5,$session_name,$algo2);
+    InsertRatings($rating6,$img6,$session_name,$algo2);
 
     $sql = "SELECT product, rating FROM product_rating where session_name = '$session_name'";
     $result = $conn->query($sql);
