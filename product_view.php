@@ -363,19 +363,19 @@ if (($handle = fopen("csv_files/Content_recomendation.csv", "r")) !== false)
                 pan class="review-no">0000 reviews</span> -->
             </div>
 
-            <div class="action">
-            <button class="add-to-cart btn btn-default" type="submit">Submit Ratings</button>
-           </div>
-           
-              </div>
-            </form>
+            
               <?php break;
 
         }
         else $found = 0;
     }
-    if ($found == 0) echo "No results ";
-
+    if ($found == 0) echo "No results ";?>
+    <div class="action">
+            <button class="add-to-cart btn btn-default" type="submit">Submit Ratings</button>
+           </div>
+           
+              </div>
+            </form><?php
     fclose($handle);
 }
 ?>

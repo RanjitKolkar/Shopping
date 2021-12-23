@@ -150,6 +150,8 @@ if (isset($_POST))
 
 $algo1=1;
 $algo2=2;
+
+    InsertRatings($rating,$img1,$session_name,$algo1);
     InsertRatings($rating1,$img1,$session_name,$algo1);
     InsertRatings($rating2,$img2,$session_name,$algo1);
     InsertRatings($rating3,$img3,$session_name,$algo1);
