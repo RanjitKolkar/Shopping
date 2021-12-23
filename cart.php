@@ -111,7 +111,7 @@ endif
 if (isset($_POST))
 {
     //Process Form Here
-    $rating = $_POST['myRatingsOption'];
+    $rating0 = $_POST['myRatingsOption'];
     $rating1 = $_POST['myRatingsOption1'];
     $rating2 = $_POST['myRatingsOption2'];
     $rating3 = $_POST['myRatingsOption3'];
@@ -151,7 +151,7 @@ if (isset($_POST))
 $algo1=1;
 $algo2=2;
 
-    InsertRatings($rating,$img1,$session_name,$algo1);
+    InsertRatings($rating0,$img1,$session_name,$algo1);
     InsertRatings($rating1,$img1,$session_name,$algo1);
     InsertRatings($rating2,$img2,$session_name,$algo1);
     InsertRatings($rating3,$img3,$session_name,$algo1);
